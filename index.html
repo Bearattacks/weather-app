@@ -6,23 +6,15 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+        <title>Weather</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-	
-	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">
-    	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css">
-        <style type='text/css'>
-        	body { max-width: 978px; margin: 15px auto; }
-	    	#output { margin-left: 0; display: none; }
-	    	#output img { height: 20px; width: 20px; vertical-align: top; }
-	    	#error { color: red; font-weight: bold; padding-left: 15px; }
-	    	.alert { margin-top: 15px; display: none; }
-	    	.form-horizontal .controls { position:relative; top:5px; }​
-    	</style>
+    	<link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+  
+<link href='http://fonts.googleapis.com/css?family=Chivo' rel='stylesheet' type='text/css'>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -30,35 +22,72 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <div class="navbar navbar-inverse">
-          <div class="navbar-inner">
-            <div class="container"><div class="brand">Weather</div></div>
-          </div>
-        </div>
-        <form id="weather" class="form-search">
-          <input type="text" id="zip" placeholder="Enter a zip code…"
-            class="input-medium search-query">
-          <button id="search" type="submit" class="btn">Search</button>
-          <div class="alert alert-error"></div>
+
+<form id="weather" class="form-search">
+  <input  autocomplete="off" type="text" id="zip" placeholder="Enter a zip code" >
+
+    <button id="search" type="submit" class="btn">Search</button>
+    <div class="alert alert-error"></div>
         </form>
+
+
         <table id="output" class="table table-striped">
-            <caption>Forecast Results</caption>
             <thead>
                 <tr>
-                    <th></th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Zip</th>
-                    <th>Temperature</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody></tbody>
         </table>
-	<a href="https://github.com/benkutil-class/awd-backbone-weather">View this on GitHub</a>
+
+
+
+    <script type="text/template" id="forecast-template" >
+
+<div class="item">
+    <h1>It is currently <%= temp %>° in <%= city %>, <%= state %>.</h1>
+</div>
+
+    </script>
+
+
+
+
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
+
+        <script src="js/vendor/jquery-ui.js"></script>
+
+
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
+
         <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
+        <script src="js/bb.js"></script>
+
+        <script src="js/fittext.js"></script>
+
+
+   <script type="text/javascript">
+          $("input[placeholder]").fitText();
+
+    </script>
+
+<script type="text/javascript">
+    $(document).ready(  function() {
+
+        $('h1').hide();
+
+        $('input#zip').keypress(function(e) {
+          if (e.keyCode == '13') {
+            $('input#zip').blur();
+           }
+        });
+
+
+    });
+</script>
+
+        <!-- <script src="js/main.js"></script> -->
     </body>
 </html>

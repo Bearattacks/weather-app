@@ -1,6 +1,9 @@
 $(document).ready(function($) {
-  $("#search").on("click", function(e) {
-    var $zip = $("#zip"),
+  
+$("#zip-field").keydown(function(e){
+    if (e.keyCode == 13) {
+    
+      var $zip = $("#zip"),
       value = $zip.val();
 
     e.preventDefault();
@@ -9,6 +12,7 @@ $(document).ready(function($) {
         url: "http://api.wunderground.com/api/7eaec3b21b154448/conditions/q/" + $zip.val() + ".json",
         dataType: "jsonp",
         success: function(data) {
+
           var mark = data.current_observation,
             location = mark.display_location,
             image = mark.image,
@@ -23,6 +27,8 @@ $(document).ready(function($) {
           $row.append($("<td />", {text: location.state_name}));
           $row.append($("<td />", {text: location.zip}));
           $row.append($("<td />", {text: mark.temp_f + "°F"}));
+          
+          //Deletes Row of Data
           $row.append($("<td />", {
             html: '<a href="#"><i class="icon-trash"></i></a>'
           })).on("click", function(e) {
@@ -42,4 +48,8 @@ $(document).ready(function($) {
       $(".alert").text("Please enter zip code").fadeIn("slow");
     }
   });
-});
+
+
+
+    }
+}); 
